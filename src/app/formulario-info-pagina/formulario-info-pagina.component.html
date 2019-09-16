@@ -1,0 +1,22 @@
+<h2>Formulario de pagina web</h2>
+
+<form [formGroup]="formularioPrincipal" (ngSubmit)="enviarFormulario()">
+    <label>URL:
+      <input type="text" formControlName="nombreWeb" required>
+    </label><br>
+    <label>Etiqueta:
+      <input type="text" formControlName="nombreEtiqueta" required>
+    </label><br>
+    <label>identificador(id):
+      <input type="text" formControlName="identificador">
+    </label><br>
+    <label>Palabra:
+      <input type="text" formControlName="palabra">
+    </label><br>
+    <button type="submit" [disabled]="!formularioPrincipal.valid">Enviar</button>
+</form>
+
+<p>URL: {{ formularioPrincipal.get('nombreWeb').value }}</p>
+<p>Tag: {{ formularioPrincipal.get('nombreEtiqueta').value }}</p>
+<p>Id: {{ formularioPrincipal.get('identificador').value }}</p>
+<p>Palabra: {{ formularioPrincipal.get('palabra').value }}</p>
