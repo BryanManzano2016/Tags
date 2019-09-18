@@ -5,7 +5,7 @@ import { Data } from '../clases/data';
 @Component({
   selector: 'app-listado-resultados',
   templateUrl: './listado-resultados.component.html',
-  styleUrls: ['./listado-resultados.component.css']
+  styleUrls: ['./listado-resultados.component.sass']
 })
 export class ListadoResultadosComponent implements OnInit {
 
@@ -18,4 +18,3 @@ export class ListadoResultadosComponent implements OnInit {
 
   ngOnInit() {}
 }
-

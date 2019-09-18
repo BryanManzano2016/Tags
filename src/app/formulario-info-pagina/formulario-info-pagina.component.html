@@ -4,17 +4,17 @@
     <form [formGroup]="formularioPrincipal" (ngSubmit)="enviarFormulario()">
         <p>https://www.example.com</p>
         <label>URL:
-      <input type="text" formControlName="nombreWeb" required>
-    </label><br>
+    <input type="text" formControlName="nombreWeb" required>
+  </label><br>
         <label>Etiqueta:
-      <input type="text" formControlName="nombreEtiqueta" required>
-    </label><br>
+    <input type="text" formControlName="nombreEtiqueta" required>
+  </label><br>
         <label>identificador(id):
-      <input type="text" formControlName="identificador">
-    </label><br>
+    <input type="text" formControlName="identificador">
+  </label><br>
         <label>Palabra:
-      <input type="text" formControlName="palabra">
-    </label><br>
+    <input type="text" formControlName="palabra">
+  </label><br>
         <button type="submit" [disabled]="!formularioPrincipal.valid">Enviar</button>
     </form>
 

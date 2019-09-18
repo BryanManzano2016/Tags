@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
+import { AppRoutingModule} from './app-routing.module';
 
 import { AppComponent } from './app.component';
 import { FormularioInfoPaginaComponent } from './formulario-info-pagina/formulario-info-pagina.component';
@@ -15,10 +16,10 @@ import { ObtenerTagsCandidatosService } from './servicios/obtener-tags-candidato
   declarations: [
     AppComponent,
     FormularioInfoPaginaComponent,
-    ListadoResultadosComponent
+    ListadoResultadosComponent,
   ],
   imports: [
-    BrowserModule, HttpClientModule, ReactiveFormsModule
+    BrowserModule, HttpClientModule, ReactiveFormsModule, AppRoutingModule
   ],
   providers: [ObtenerTagsCandidatosService],
   bootstrap: [AppComponent]

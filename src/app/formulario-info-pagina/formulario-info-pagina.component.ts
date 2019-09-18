@@ -8,7 +8,7 @@ import { FormGroup, FormControl } from '@angular/forms';
 @Component({
   selector: 'app-formulario-info-pagina',
   templateUrl: './formulario-info-pagina.component.html',
-  styleUrls: ['./formulario-info-pagina.component.css']
+  styleUrls: ['./formulario-info-pagina.component.sass']
 })
 
 export class FormularioInfoPaginaComponent implements OnInit {
@@ -45,6 +45,7 @@ export class FormularioInfoPaginaComponent implements OnInit {
 
     setTimeout(() => {
       this.data = this.servicioGeneradorTags.dataReturn;
+      // this.data = [ new Data() ];
       this.servicioVariables.ingresarCandidatos(this.data);
     }, 3000);
 
