@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { VariablesCompartidasService } from '../servicios/variables-compartidas.service';
+import { Data } from '../clases/data';
 
 @Component({
   selector: 'app-listado-resultados',
@@ -7,9 +9,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ListadoResultadosComponent implements OnInit {
 
-  constructor() { }
+  data: Data[];
+  validarOperacion: boolean;
 
-  ngOnInit() {
+  constructor(private servicioVariables: VariablesCompartidasService ) {
+    this.servicioVariables.listaCandidatosActual.subscribe(e => this.data = e);
   }
 
+  ngOnInit() {}
 }
+

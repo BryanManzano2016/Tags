@@ -1,7 +1,8 @@
 import { ObtenerTagsCandidatosService } from '../servicios/obtener-tags-candidatos.service';
+import { VariablesCompartidasService } from '../servicios/variables-compartidas.service';
 import { Data } from '../clases/data';
 
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 
 @Component({
@@ -12,10 +13,9 @@ import { FormGroup, FormControl } from '@angular/forms';
 
 export class FormularioInfoPaginaComponent implements OnInit {
 
-  validarOperacion = true;
-  solicitudCompacta: string;
   solicitud: object;
-  public data = [];
+  data: Data[];
+  validar: boolean;
 
   formularioPrincipal = new FormGroup({
     nombreWeb: new FormControl(''),
@@ -24,21 +24,29 @@ export class FormularioInfoPaginaComponent implements OnInit {
     palabra: new FormControl('')
   });
 
-  constructor(public miServicio: ObtenerTagsCandidatosService) {
-  }
+  constructor( private servicioGeneradorTags: ObtenerTagsCandidatosService,
+               private servicioVariables: VariablesCompartidasService ) {
+      this.servicioVariables.listaCandidatosActual.subscribe(e => this.data = e);
+   }
 
   ngOnInit() {
+    this.validar = false;
   }
 
   enviarFormulario() {
+
     this.solicitud = { nombreWeb: this.formularioPrincipal.get('nombreWeb').value,
       nombreEtiqueta: this.formularioPrincipal.get('nombreEtiqueta').value,
       identificador: this.formularioPrincipal.get('identificador').value,
       palabra: this.formularioPrincipal.get('palabra').value
     };
-    this.miServicio.obtenerData(JSON.stringify(this.solicitud)).subscribe((data) => {
-      this.data = Array.from(Object.keys(data), k => data[k]);
-      console.log(this.data);
-    });
+
+    this.servicioGeneradorTags.obtenerData(JSON.stringify(this.solicitud));
+
+    setTimeout(() => {
+      this.data = this.servicioGeneradorTags.dataReturn;
+      this.servicioVariables.ingresarCandidatos(this.data);
+    }, 3000);
+
   }
 }
