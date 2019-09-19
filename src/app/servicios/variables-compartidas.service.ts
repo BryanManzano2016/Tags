@@ -1,6 +1,9 @@
 import { Injectable } from '@angular/core';
-import { Data } from '../clases/data';
+
 import { BehaviorSubject } from 'rxjs';
+
+import { Solicitud } from '../clases/solicitud';
+import { Data } from '../clases/data';
 
 @Injectable({
   providedIn: 'root'
@@ -10,16 +13,24 @@ export class VariablesCompartidasService {
   private listaCandidatos = new BehaviorSubject([]);
   listaCandidatosActual = this.listaCandidatos.asObservable();
 
-  validarOperacion = false;
+  private validarOperacion = new BehaviorSubject([]);
+  validarOperacionActual = this.validarOperacion.asObservable();
+
+  private solicitud = new BehaviorSubject([]);
+  solicitudActual = this.solicitud.asObservable();
+
+  constructor() { }
 
   ingresarCandidatos(data: Data[]) {
     this.listaCandidatos.next(data);
   }
 
-  constructor() { }
+  cambiarValidar(data: boolean[]) {
+    this.validarOperacion.next(data);
+  }
 
-  cambiarEstadoResultados() {
-    this.validarOperacion = !this.validarOperacion;
+  cambiarSolicitud(data: Solicitud[]) {
+    this.solicitud.next(data);
   }
 
 }

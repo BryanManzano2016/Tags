@@ -1,13 +1,13 @@
-<div>
+<div *ngIf="validarEnvio[0]">
     <h2>Formulario de pagina web</h2>
 
     <form [formGroup]="formularioPrincipal" (ngSubmit)="enviarFormulario()">
         <p>https://www.example.com</p>
         <label>URL:
-    <input type="text" formControlName="nombreWeb" required>
+    <input type="text" formControlName="nombreWeb">
   </label><br>
         <label>Etiqueta:
-    <input type="text" formControlName="nombreEtiqueta" required>
+    <input type="text" formControlName="nombreEtiqueta">
   </label><br>
         <label>identificador(id):
     <input type="text" formControlName="identificador">

@@ -9,9 +9,6 @@ import { ListadoResultadosComponent } from './listado-resultados/listado-resulta
 
 import { ReactiveFormsModule } from '@angular/forms';
 
-// Servicios
-import { ObtenerTagsCandidatosService } from './servicios/obtener-tags-candidatos.service';
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -21,7 +18,7 @@ import { ObtenerTagsCandidatosService } from './servicios/obtener-tags-candidato
   imports: [
     BrowserModule, HttpClientModule, ReactiveFormsModule, AppRoutingModule
   ],
-  providers: [ObtenerTagsCandidatosService],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

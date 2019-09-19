@@ -1,8 +1,10 @@
 import { ObtenerTagsCandidatosService } from '../servicios/obtener-tags-candidatos.service';
 import { VariablesCompartidasService } from '../servicios/variables-compartidas.service';
-import { Data } from '../clases/data';
 
-import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { Data } from '../clases/data';
+import { Solicitud } from '../clases/solicitud';
+
+import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 
 @Component({
@@ -13,9 +15,10 @@ import { FormGroup, FormControl } from '@angular/forms';
 
 export class FormularioInfoPaginaComponent implements OnInit {
 
-  solicitud: object;
+  solicitud: Solicitud;
   data: Data[];
-  validar: boolean;
+  validarEnvio = [];
+  solicitudEnvio: object[];
 
   formularioPrincipal = new FormGroup({
     nombreWeb: new FormControl(''),
@@ -27,27 +30,39 @@ export class FormularioInfoPaginaComponent implements OnInit {
   constructor( private servicioGeneradorTags: ObtenerTagsCandidatosService,
                private servicioVariables: VariablesCompartidasService ) {
       this.servicioVariables.listaCandidatosActual.subscribe(e => this.data = e);
+      this.servicioVariables.validarOperacionActual.subscribe(e => this.validarEnvio = e);
+      this.servicioVariables.solicitudActual.subscribe(e => this.solicitudEnvio = e);
+      this.servicioVariables.cambiarValidar([true]);
    }
 
-  ngOnInit() {
-    this.validar = false;
-  }
+  ngOnInit() { }
 
   enviarFormulario() {
 
-    this.solicitud = { nombreWeb: this.formularioPrincipal.get('nombreWeb').value,
-      nombreEtiqueta: this.formularioPrincipal.get('nombreEtiqueta').value,
-      identificador: this.formularioPrincipal.get('identificador').value,
-      palabra: this.formularioPrincipal.get('palabra').value
-    };
+    this.solicitud = new Solicitud ( this.formularioPrincipal.get('nombreWeb').value,
+      this.formularioPrincipal.get('nombreEtiqueta').value,
+      this.formularioPrincipal.get('identificador').value,
+      this.formularioPrincipal.get('palabra').value,
+      []
+    );
 
-    this.servicioGeneradorTags.obtenerData(JSON.stringify(this.solicitud));
+    // this.servicioGeneradorTags.obtenerData(this.solicitud);
 
+    const HEROES: Data[] = [
+      { etiqueta: 'p', elemento: 'Dr Nice' },
+      { etiqueta: 'p', elemento: 'Dr Nice 2' },
+      { etiqueta: 'p', elemento: 'Dr Nice 3' }
+    ];
+
+    this.data = HEROES;
+    this.servicioVariables.ingresarCandidatos(this.data);
+    this.servicioVariables.cambiarSolicitud([this.solicitud]);
+    this.servicioVariables.cambiarValidar([false]);
+  /*
     setTimeout(() => {
       this.data = this.servicioGeneradorTags.dataReturn;
-      // this.data = [ new Data() ];
       this.servicioVariables.ingresarCandidatos(this.data);
     }, 3000);
-
+  */
   }
 }
