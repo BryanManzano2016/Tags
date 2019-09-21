@@ -17,6 +17,7 @@ export class ListadoResultadosComponent implements OnInit {
   dataEnviar: string[];
   solicitudEnvio: Solicitud[];
   validarEnvio = [];
+  mensaje = '';
 
   constructor(private servicioVariables: VariablesCompartidasService,
               private servicioGuardar: ProcesarTagsService) {
@@ -33,15 +34,32 @@ export class ListadoResultadosComponent implements OnInit {
   }
 
   enviarElementos() {
+
     this.solicitudEnvio[0].elementos = this.dataEnviar;
-    if (this.servicioGuardar.enviarSeleccion(this.solicitudEnvio[0])) {
-      this.servicioVariables.cambiarValidar([true]);
-      this.vaciarListas();
+
+    if (this.dataEnviar !== undefined && this.solicitudEnvio[0].elementos.length > 0) {
+      if (this.servicioGuardar.enviarSeleccion(this.solicitudEnvio[0])) {
+        this.mensaje = 'Envio exitoso';
+        setTimeout(() => {
+          this.atras();
+        }, 5000);
+      } else {
+        this.mensaje = 'Servidor inabilitado';
+      }
+    } else {
+      this.mensaje = 'Nada que enviar';
     }
+
   }
 
   vaciarListas() {
     this.data = [];
     this.dataEnviar = [];
+  }
+
+  atras() {
+    this.vaciarListas();
+    this.servicioVariables.cambiarValidar([true]);
+    this.mensaje = '';
   }
 }

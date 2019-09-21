@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Data } from '../clases/data';
 import { Solicitud } from '../clases/solicitud';
 
@@ -9,14 +9,18 @@ import { Solicitud } from '../clases/solicitud';
 
 export class ObtenerTagsCandidatosService {
 
-  dataReturn: Data[];
+  dataReturn: Data[] = [];
 
   constructor(private http: HttpClient) { }
 
   obtenerData(solicitud: Solicitud) {
-    const httpOptions = { params: new HttpParams().set('solicitud', JSON.stringify(solicitud)) };
-    this.http.get<Data[]>('http://localhost:9000/enlaces', httpOptions).toPromise().then( (data: any) => {
-      this.dataReturn = data;
-    });
+
+    this.dataReturn = [];
+
+    const httpOptions = { params: new HttpParams().set('solicitud',
+     JSON.stringify(solicitud)) };
+    this.http.get<Data[]>('http://localhost:9000/enlaces', httpOptions).toPromise().
+      then( (data: any) => { this.dataReturn = data; });
+
   }
 }

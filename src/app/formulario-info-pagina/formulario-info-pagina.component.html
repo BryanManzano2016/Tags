@@ -4,13 +4,10 @@
     <form [formGroup]="formularioPrincipal" (ngSubmit)="enviarFormulario()">
         <p>https://www.example.com</p>
         <label>URL:
-    <input type="text" formControlName="nombreWeb">
+    <input type="text" formControlName="nombreWeb" required>
   </label><br>
         <label>Etiqueta:
-    <input type="text" formControlName="nombreEtiqueta">
-  </label><br>
-        <label>identificador(id):
-    <input type="text" formControlName="identificador">
+    <input type="text" formControlName="nombreEtiqueta" required>
   </label><br>
         <label>Palabra:
     <input type="text" formControlName="palabra">
@@ -18,6 +15,7 @@
         <button type="submit" [disabled]="!formularioPrincipal.valid">Enviar</button>
     </form>
 
+    <p>{{mensaje}}</p>
 </div>
 
 <app-listado-resultados></app-listado-resultados>
