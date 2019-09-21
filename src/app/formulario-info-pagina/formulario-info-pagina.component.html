@@ -1,21 +1,22 @@
-<div *ngIf="validarEnvio[0]">
-    <h2>Formulario de pagina web</h2>
+<div id="main" *ngIf="validarEnvio[0]">
+    <h1>FORMULARIO PARA OBTENER TAGS</h1>
 
     <form [formGroup]="formularioPrincipal" (ngSubmit)="enviarFormulario()">
-        <p>https://www.example.com</p>
-        <label>URL:
-    <input type="text" formControlName="nombreWeb" required>
-  </label><br>
-        <label>Etiqueta:
-    <input type="text" formControlName="nombreEtiqueta" required>
-  </label><br>
-        <label>Palabra:
-    <input type="text" formControlName="palabra">
-  </label><br>
+
+        <label>URL</label><br>
+        <input type="text" formControlName="nombreWeb" required><br>
+
+        <label>SELECTOR:</label><br>
+        <input type="text" formControlName="nombreEtiqueta" required><br>
+
+        <label>PALABRA:</label><br>
+        <input type="text" formControlName="palabra"><br>
+
         <button type="submit" [disabled]="!formularioPrincipal.valid">Enviar</button>
+
     </form>
 
-    <p>{{mensaje}}</p>
+    <h1>{{mensaje}}</h1>
 </div>
 
 <app-listado-resultados></app-listado-resultados>

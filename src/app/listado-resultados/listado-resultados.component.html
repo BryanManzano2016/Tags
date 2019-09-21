@@ -1,15 +1,24 @@
-<div *ngIf="!validarEnvio[0]">
-    <h2>Lista de resultados</h2>
+<div id="main" *ngIf="!validarEnvio[0]">
+
+    <button (click)="atras()">Atras</button>
+
+    <h1>Lista de resultados</h1>
+
     <select id="seleccion" multiple>
       <option *ngFor="let dato of data" [value]="dato.elemento" (click)="seleccionItems()">{{dato.elemento}}</option>
     </select>
+
     <div style="margin: 20px">
-        <h3>Elementos seleccionados: </h3>
+
+        <h2 class="anuncio">Elementos seleccionados: </h2>
+
         <ul>
             <li *ngFor="let dato of dataEnviar">{{dato}}</li>
         </ul>
-        <button (click)="enviarElementos()">Guardar</button>
-        <p>{{mensaje}}</p>
+
+        <button id="btnEnviar" (click)="enviarElementos()">Guardar</button>
+        <h2 class="anuncio">{{mensaje}}</h2>
+
     </div>
-    <button (click)="atras()">Atras</button>
+
 </div>
